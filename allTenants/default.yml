@@ -1,0 +1,12 @@
+#name=default
+#datasource.url=jdbc:postgresql://localhost:5432/default
+#datasource.username=postgres
+#datasource.password=Dbc@1234
+#datasource.driver-class-name=org.postgresql.Driver
+
+name: default
+datasource:
+  url: jdbc:postgresql://localhost:5432/default
+  username: postgres
+  password: Dbc@1234
+  driver-class-name: org.postgresql.Driver
