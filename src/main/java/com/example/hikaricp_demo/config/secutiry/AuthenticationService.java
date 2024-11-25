@@ -15,7 +15,7 @@ import java.util.Date;
 
 public class AuthenticationService {
 
-    private static final long EXPIRATION_TIME = 864_000_00; // 1 day in milliseconds
+    private static final long EXPIRATION_TIME = 5 * 60 * 1000; // 5 minute
     private static final String SECRET_KEY = "q3t6w9zCFJNcQfTjWnq3t6w9zCFJNcQfTjWnZr4u7xADGKaPd";
     private static final SecretKey SIGNING_KEY = Keys.hmacShaKeyFor(SECRET_KEY.getBytes(StandardCharsets.UTF_8));
     private static final String PREFIX = "Bearer";
