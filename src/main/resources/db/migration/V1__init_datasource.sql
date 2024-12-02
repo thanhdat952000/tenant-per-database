@@ -1,0 +1,12 @@
+CREATE TABLE city (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(255)
+);
+
+
+CREATE TABLE coquanquanly (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    tenant_id VARCHAR(255) NOT NULL UNIQUE,
+    is_deleted BOOLEAN NOT NULL DEFAULT FALSE
+);

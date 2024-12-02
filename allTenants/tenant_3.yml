@@ -1,6 +1,0 @@
-name: tenant_3
-datasource:
-  url: jdbc:postgresql://localhost:5432/tenant3
-  username: postgres
-  password: Dbc@1234
-  driver-class-name: org.postgresql.Driver

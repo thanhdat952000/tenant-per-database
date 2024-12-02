@@ -1,29 +1,33 @@
 package com.example.hikaricp_demo.domain;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
-@Entity
 @Getter
 @Setter
+@Entity
 @Table(name = "tenant_config")
 public class TenantConfig {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "tenant_id", nullable = false, unique = true)
-    private String tenantId;
+    @Column(name = "driver_class_name")
+    private String driverClassName;
 
     @Column(name = "db_url")
     private String url;
 
     @Column(name = "db_username")
-    private String userName;
+    private String username;
 
     @Column(name = "db_password")
     private String password;
 
-    @Column(name = "driver_class_name")
-    private String driverClassName;
+    @Column(name = "db_schema")
+    private String schema;
+
+    @Column(name = "tenant_id", unique = true)
+    private String tenantId;
 }

@@ -3,8 +3,6 @@ package com.example.hikaricp_demo.config;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
@@ -18,7 +16,6 @@ import java.io.InputStream;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 @Configuration
 public class MultiTenantConfiguration {
@@ -40,17 +37,20 @@ public class MultiTenantConfiguration {
             try (InputStream inputStream = new FileInputStream(propertyFile)) {
                 tenantProperties = yaml.load(inputStream);
 
-                String tenantId = (String) tenantProperties.get("name");
+                String tenantId = (String) tenantProperties.get("tenant-id");
                 Map<String, Object> datasourceProperties = (Map<String, Object>) tenantProperties.get("datasource");
+                String driverClassName = (String) datasourceProperties.get("driver-class-name");
+                String url = (String) datasourceProperties.get("url");
+                String username = (String) datasourceProperties.get("username");
+                String password = (String) datasourceProperties.get("password");
+                String schema = (String) datasourceProperties.get("schema");
 
                 HikariConfig hikariConfig = new HikariConfig();
-                hikariConfig.setDriverClassName((String) datasourceProperties.get("driver-class-name"));
-                hikariConfig.setJdbcUrl((String) datasourceProperties.get("url"));
-                hikariConfig.setUsername((String) datasourceProperties.get("username"));
-                hikariConfig.setPassword((String) datasourceProperties.get("password"));
-//                hikariConfig.setSchema((String) datasourceProperties.get("schema"));
-//                hikariConfig.setMaximumPoolSize(10);
-//                hikariConfig.setConnectionTimeout(30000);
+                hikariConfig.setDriverClassName(driverClassName);
+                hikariConfig.setJdbcUrl(url);
+                hikariConfig.setUsername(username);
+                hikariConfig.setPassword(password);
+                hikariConfig.setSchema(schema);
 
                 HikariDataSource dataSource = new HikariDataSource(hikariConfig);
                 resolvedDataSources.put(tenantId, dataSource);
